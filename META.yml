@@ -1,0 +1,37 @@
+---
+abstract: 'Manages installs of versions of Apache ActiveMQ, and provides a standard way to start an MQ server from perl.'
+author:
+  - 'Tomas Doran (t0m) <bobtfish@bobtfish.net>'
+build_requires:
+  ExtUtils::MakeMaker: 6.42
+configure_requires:
+  ExtUtils::MakeMaker: 6.42
+distribution_type: module
+generated_by: 'Module::Install version 0.87'
+license: apache
+meta-spec:
+  url: http://module-build.sourceforge.net/META-spec-v1.4.html
+  version: 1.4
+name: Alien-ActiveMQ
+no_index:
+  directory:
+    - inc
+    - share
+    - t
+requires:
+  Archive::Extract: 0
+  File::ShareDir: 0
+  File::Temp: 0
+  IPC::Run: 0
+  LWP: 0
+  Method::Signatures::Simple: 0
+  Moose: 0
+  MooseX::Getopt: 0
+  MooseX::Types: 0
+  MooseX::Types::Path::Class: 0
+  Path::Class: 0
+  Scope::Guard: 0
+  namespace::autoclean: 0
+resources:
+  license: http://apache.org/licenses/LICENSE-2.0
+version: 0.00001
