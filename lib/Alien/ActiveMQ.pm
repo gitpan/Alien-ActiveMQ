@@ -5,9 +5,10 @@ use File::ShareDir qw/dist_dir/;
 use Path::Class qw/file dir/;
 use Scope::Guard;
 use IPC::Run qw/start/;
+use Net::Stomp;
 use namespace::autoclean;
 
-our $VERSION = '0.00001';
+our $VERSION = '0.00003';
 
 #method get_installed_versions {}
 
@@ -20,7 +21,7 @@ method get_version_dir ($version) {
 }
 
 method is_version_installed ($version) {
-    -d $self->get_version_dir($version)
+    -d $self->get_version_dir($version);
 }
 
 method get_licence_filename ($version) {
@@ -32,15 +33,27 @@ method run_server ($version) {
     my $dir = $self->get_version_dir($version);
     my @cmd = (file( $dir, 'bin', 'activemq' ));
 
-    # TODO - might be nice to grab the output of the server and wait til
-    # it said it was started.  For now, just sleep a bit.
+    # Start activemq in a subprocess
     warn("Running @cmd");
     my $h = start \@cmd, \undef;
-    sleep 60;
-
+    
+    # Spin until we can get a connection
+    my ($stomp, $loop_count);
+    while (! $stomp) {
+        if ($loop_count++ > 300) {
+            die("Can't connect to ActiveMQ after trying 300 seconds.")
+        };
+        eval {
+            $stomp = Net::Stomp->new( { hostname => 'localhost', port => 61613 } );
+        };
+        if ($@) {
+            sleep 1;
+        }
+    }
+    
     return Scope::Guard->new(sub { 
         warn("Killing ApacheMQ...");
-        $h->signal ( "KILL" ) 
+        $h->signal ( "KILL" );
     });
 }
 
