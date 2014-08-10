@@ -1,13 +1,15 @@
 ---
-abstract: 'Manages installs of versions of Apache ActiveMQ, and provides a standard way to start an MQ server from perl.'
+abstract: 'Manages installs of versions of Apache ActiveMQ, and provides a standard'
 author:
   - 'Tomas Doran (t0m) <bobtfish@bobtfish.net>'
 build_requires:
-  ExtUtils::MakeMaker: 6.42
+  ExtUtils::MakeMaker: 6.36
+  Test::MockModule: 0
 configure_requires:
-  ExtUtils::MakeMaker: 6.42
+  ExtUtils::MakeMaker: 6.36
 distribution_type: module
-generated_by: 'Module::Install version 0.91'
+dynamic_config: 1
+generated_by: 'Module::Install version 1.08'
 license: apache
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.4.html
@@ -20,6 +22,7 @@ no_index:
     - t
 requires:
   Archive::Extract: 0
+  Const::Fast: 0
   File::Copy::Recursive: 0
   File::ShareDir: 0
   File::Temp: 0
@@ -33,7 +36,8 @@ requires:
   Net::Stomp: 0
   Path::Class: 0
   Scope::Guard: 0
+  Sort::Versions: 0
   namespace::autoclean: 0
 resources:
   license: http://apache.org/licenses/LICENSE-2.0
-version: 0.00004
+version: 0.00004_01
