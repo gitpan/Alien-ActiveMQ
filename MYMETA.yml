@@ -36,4 +36,4 @@ requires:
   Scope::Guard: '0'
   Sort::Versions: '0'
   namespace::autoclean: '0'
-version: 0.00004_01
+version: '0.00005'
